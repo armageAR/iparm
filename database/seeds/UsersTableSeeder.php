@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 //use Illuminate\Support\Facades\DB;
+use App\Administrator;
 use App\User;
 
 class UsersTableSeeder extends Seeder
@@ -13,15 +14,16 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-       /* DB::table('users')->insert([
-            'name' => 'Administrator',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('admin'),
-        ]);*/
+       //create the firs Admin
+        Administrator::create();
+
+        //create the user fo the admin
         User::create([
         	'name' => 'Administrator',
             'email' => 'admin@example.com',
             'password' => bcrypt('admin'),
+            'userable_type' => 'admin',
+            'userable_id' => 1,
         ]);
 
         //associate first user with admin role
@@ -29,6 +31,6 @@ class UsersTableSeeder extends Seeder
 
 
         //Adding 20 fake users for testing
-        factory(App\User::class,20)->create();
+        //factory(App\User::class,20)->create();
     }
 }

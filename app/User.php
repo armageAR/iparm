@@ -5,6 +5,13 @@ namespace App;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\Relation;
+
+Relation::morphMap([
+    'employer' => 'App\Employer',
+    'student' => 'App\Student',
+    'admin' => 'App\Administrator',
+]);
 
 class User extends Authenticatable
 {
@@ -27,4 +34,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function userable(){
+        return $this->morphTo();
+    }
 }
