@@ -39,3 +39,4 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('users/{user}', 'UserController@edit')->name('users.edit')->middleware('permission:users.edit');
 
 });
+Route::resource('admin/permission', 'Admin\\PermissionController');
