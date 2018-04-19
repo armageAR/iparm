@@ -23,20 +23,30 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware(['auth'])->group(function(){
 
 	//Roles
-	Route::post('roles/store', 'RoleController@store')->name('roles.store')->middleware('permission:roles.create');
-	Route::get('roles', 'RoleController@index')->name('roles.index')->middleware('permission:roles.index');
-	Route::get('roles/create', 'RoleController@create')->name('roles.create')->middleware('permission:roles.create');
-	Route::put('roles/{role}', 'RoleController@update')->name('roles.update')->middleware('permission:roles.edit');
-	Route::get('roles/{role}', 'RoleController@show')->name('roles.show')->middleware('permission:roles.show');
-	Route::delete('roles/{role}', 'RoleController@destroy')->name('roles.destroy')->middleware('permission:roles.destroy');
-	Route::get('roles/{role}', 'RoleController@edit')->name('roles.edit')->middleware('permission:roles.edit');
+	Route::post('admin/roles', 'Admin\\RoleController@store')->name('admin.roles.store')->middleware('permission:roles.create');
+	Route::get('admin/roles', 'Admin\\RoleController@index')->name('admin.roles.index')->middleware('permission:roles.index');
+	Route::get('admin/roles/create', 'Admin\\RoleController@create')->name('admin.roles.create')->middleware('permission:roles.create');
+	Route::patch('admin/roles/{role}', 'Admin\\RoleController@update')->name('admin.roles.update')->middleware('permission:roles.edit');
+	Route::get('admin/roles/{role}', 'Admin\\RoleController@show')->name('admin.roles.show')->middleware('permission:roles.show');
+	Route::delete('admin/roles/{role}', 'Admin\\RoleController@destroy')->name('admin.roles.destroy')->middleware('permission:roles.destroy');
+	Route::get('admin/roles/{role}/edit', 'Admin\\RoleController@edit')->name('admin.roles.edit')->middleware('permission:roles.edit');
+
+	//Permisions
+	Route::post('admin/permissions', 'Admin\\PermissionController@store')->name('admin.permissions.store')->middleware('permission:permissions.create');
+	Route::get('admin/permissions', 'Admin\\PermissionController@index')->name('admin.permissions.index')->middleware('permission:permissions.index');
+	Route::get('admin/permissions/create', 'Admin\\PermissionController@create')->name('admin.permissions.create')->middleware('permission:permissions.create');
+	Route::patch('admin/permissions/{permission}', 'Admin\\PermissionController@update')->name('admin.permissions.update')->middleware('permission:permissions.edit');
+	Route::get('admin/permissions/{permission}', 'Admin\\PermissionController@show')->name('permissions.show')->middleware('permission:permissions.show');
+	Route::delete('admin/permissions/{permission}', 'Admin\\PermissionController@destroy')->name('admin.permissions.destroy')->middleware('permission:permissions.destroy');
+	Route::get('admin/permissions/{permission}/edit', 'Admin\\PermissionController@edit')->name('admin.permissions.edit')->middleware('permission:permissions.edit');
 
 	//Users
-	Route::get('users', 'UserController@index')->name('users.index')->middleware('permission:users.index');
-	Route::put('users/{user}', 'UserController@update')->name('users.update')->middleware('permission:users.edit');
-	Route::get('roles/{user}', 'UserController@show')->name('users.show')->middleware('permission:users.show');
-	Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')->middleware('permission:users.destroy');
-	Route::get('users/{user}', 'UserController@edit')->name('users.edit')->middleware('permission:users.edit');
+	Route::get('admin/users', 'Admin\\UserController@index')->name('admin.users.index')->middleware('permission:users.index');
+	Route::patch('admin/users/{user}', 'Admin\\UserController@update')->name('users.update')->middleware('permission:users.edit');
+	Route::get('admin/users/{user}', 'Admin\\UserController@show')->name('users.show')->middleware('permission:users.show');
+	Route::delete('admin/users/{user}', 'Admin\\UserController@destroy')->name('users.destroy')->middleware('permission:users.destroy');
+	Route::get('admin/users/{user}/edit', 'Admin\\UserController@edit')->name('users.edit')->middleware('permission:users.edit');
+
+
 
 });
-Route::resource('admin/permission', 'Admin\\PermissionController');

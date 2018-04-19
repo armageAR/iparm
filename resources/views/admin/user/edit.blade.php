@@ -6,9 +6,9 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Edit Permission #{{ $permission->id }}</div>
+                    <div class="card-header">Edit user #{{ $user->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/permissions') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/users') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -20,14 +20,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($permission, [
+                        {!! Form::model($user, [
                             'method' => 'PATCH',
-                            'url' => ['/admin/permissions', $permission->id],
+                            'url' => ['/admin/users', $user->id],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}
 
-                        @include ('admin.permission.form', ['submitButtonText' => 'Update'])
+                        @include ('admin.user.form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 

@@ -6,20 +6,20 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Permission {{ $permission->id }}</div>
+                    <div class="card-header">Role {{ $role->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/admin/permissions') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/admin/permissions/' . $permission->id . '/edit') }}" title="Edit Permission"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                        <a href="{{ url('/admin/roles') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/roles/' . $role->id . '/edit') }}" title="Edit Role"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['admin/permissions', $permission->id],
+                            'url' => ['admin/roles', $role->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
                                     'type' => 'submit',
                                     'class' => 'btn btn-danger btn-sm',
-                                    'title' => 'Delete Permission',
+                                    'title' => 'Delete Role',
                                     'onclick'=>'return confirm("Confirm delete?")'
                             ))!!}
                         {!! Form::close() !!}
@@ -30,9 +30,9 @@
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>
-                                        <th>ID</th><td>{{ $permission->id }}</td>
+                                        <th>ID</th><td>{{ $role->id }}</td>
                                     </tr>
-                                    <tr><th> Name </th><td> {{ $permission->name }} </td></tr><tr><th> Slug </th><td> {{ $permission->slug }} </td></tr><tr><th> Description </th><td> {{ $permission->description }} </td></tr>
+                                    <tr><th> Name </th><td> {{ $role->name }} </td></tr><tr><th> Slug </th><td> {{ $role->slug }} </td></tr><tr><th> Description </th><td> {{ $role->description }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

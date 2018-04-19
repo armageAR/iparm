@@ -7,13 +7,16 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Permission</div>
+                    <div class="card-header">User</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/permissions/create') }}" class="btn btn-success btn-sm" title="Add New Permission">
+                        
+                        <!--
+                        <a href="{{ url('/admin/users/create') }}" class="btn btn-success btn-sm" title="Add New user">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
+                        -->
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/admin/permission', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
+                        {!! Form::open(['method' => 'GET', 'url' => '/admin/users', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
                             <span class="input-group-append">
@@ -30,26 +33,26 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Name</th><th>Slug</th><th>Description</th><th>Actions</th>
+                                        <th>#</th><th>Name</th><th>Email</th><th>Roles</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($permission as $item)
+                                @foreach($user as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->slug }}</td><td>{{ $item->description }}</td>
+                                        <td>{{ $item->name }}</td><td>{{ $item->email }}</td><td>{{ $item->roles }}</td>
                                         <td>
-                                            <a href="{{ url('/admin/permissions/' . $item->id) }}" title="View Permission"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/admin/permissions/' . $item->id . '/edit') }}" title="Edit Permission"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <a href="{{ url('/admin/users/' . $item->id) }}" title="View user"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/admin/users/' . $item->id . '/edit') }}" title="Edit user"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
-                                                'url' => ['/admin/permissions', $item->id],
+                                                'url' => ['/admin/users', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
                                                 {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
                                                         'type' => 'submit',
                                                         'class' => 'btn btn-danger btn-sm',
-                                                        'title' => 'Delete Permission',
+                                                        'title' => 'Delete user',
                                                         'onclick'=>'return confirm("Confirm delete?")'
                                                 )) !!}
                                             {!! Form::close() !!}
@@ -58,7 +61,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $permission->appends(['search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $user->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>

@@ -36,10 +36,13 @@
                       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         @can('users.index')
-                            <li><a class="dropdown-item" href="{{ route ('users.index') }}">Users</a></li>
+                            <li><a class="dropdown-item" href="{{ route ('admin.users.index') }}">Users</a></li>
                         @endcan
                         @can('roles.index')
-                            <li><a class="dropdown-item" href="{{ route ('roles.index') }}">Roles</a></li>
+                            <li><a class="dropdown-item" href="{{ route ('admin.roles.index') }}">Roles</a></li>
+                        @endcan
+                        @can('permissions.index')
+                            <li><a class="dropdown-item" href="{{ route ('admin.permissions.index') }}">Permissions</a></li>
                         @endcan
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>

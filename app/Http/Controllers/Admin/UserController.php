@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Caffeinated\Shinobi\Models\Permission;
+use App\User;
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,15 +21,12 @@ class PermissionController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $permission = Permission::where('name', 'LIKE', "%$keyword%")
-                ->orWhere('slug', 'LIKE', "%$keyword%")
-                ->orWhere('description', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
+            $user = User::latest()->paginate($perPage);
         } else {
-            $permission = Permission::latest()->paginate($perPage);
+            $user = User::latest()->paginate($perPage);
         }
 
-        return view('admin.permission.index', compact('permission'));
+        return view('admin.user.index', compact('user'));
     }
 
     /**
@@ -39,7 +36,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('admin.permission.create');
+        return view('admin.user.create');
     }
 
     /**
@@ -54,9 +51,9 @@ class PermissionController extends Controller
         
         $requestData = $request->all();
         
-        Permission::create($requestData);
+        User::create($requestData);
 
-        return redirect('admin/permissions')->with('flash_message', 'Permission added!');
+        return redirect('admin/users')->with('flash_message', 'User added!');
     }
 
     /**
@@ -68,9 +65,9 @@ class PermissionController extends Controller
      */
     public function show($id)
     {
-        $permission = Permission::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return view('admin.permission.show', compact('permission'));
+        return view('admin.user.show', compact('user'));
     }
 
     /**
@@ -82,9 +79,9 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        $permission = Permission::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return view('admin.permission.edit', compact('permission'));
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -100,10 +97,10 @@ class PermissionController extends Controller
         
         $requestData = $request->all();
         
-        $permission = Permission::findOrFail($id);
-        $permission->update($requestData);
+        $user = User::findOrFail($id);
+        $user->update($requestData);
 
-        return redirect('admin/permissions')->with('flash_message', 'Permission updated!');
+        return redirect('admin/users')->with('flash_message', 'User updated!');
     }
 
     /**
@@ -115,8 +112,8 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        Permission::destroy($id);
+        User::destroy($id);
 
-        return redirect('admin/permissions')->with('flash_message', 'Permission deleted!');
+        return redirect('admin/users')->with('flash_message', 'User deleted!');
     }
 }
