@@ -15,6 +15,9 @@ Route::get('/', function () {    return view('welcome');});
 Route::get('/employers', function () {    return view('employers');})->name('employers');
 Route::get('/students', function () {    return view('students');})->name('students');
 
+
+Route::get('/verifyemail/{token}', 'EmployerController@verify');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

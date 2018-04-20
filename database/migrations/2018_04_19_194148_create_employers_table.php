@@ -15,7 +15,7 @@ class CreateEmployersTable extends Migration
     {
         Schema::create('employers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('companyname');
+            $table->string('companyname')->nullable();;
             $table->string('logosrc')->nullable();
             $table->timestamps();
         });

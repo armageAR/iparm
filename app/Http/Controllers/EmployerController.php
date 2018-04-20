@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
 use App\Employer;
+use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use App\Jobs\SendVerificationEmail;
 
 class EmployerController extends Controller
 {
@@ -25,7 +29,7 @@ class EmployerController extends Controller
      */
     public function create()
     {
-        return view('employer.register');
+        return view('employer.register-step1');
     }
 
     /**
@@ -34,20 +38,31 @@ class EmployerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         
+        $validatedData = $request->validate([
+            'email' => 'required|email|unique:users',
+            'password' => 'min:6',
+            'password-confirm' => 'required_with:password|same:password|min:6'
+        ]);
+
         $emp = Employer::create(request(['companyname']));
 
-        User::create([
-            'name' => request('name'),
+        $user = User::create([
             'email' => request('email'),
             'password' => bcrypt(request('password')),
+            'email_token' => base64_encode(request('email')),
             'userable_id' => $emp->id,
             'userable_type' => 'employer'
         ]);
 
-        return view('thanks');
+        //Send email verification///////////////////////////////////
+        //dispatch(new SendVerificationEmail($user));
+        
+        return view('verification');
+
+        //return view('thanks');
     }
 
     /**
@@ -94,4 +109,6 @@ class EmployerController extends Controller
     {
         //
     }
+
+   
 }

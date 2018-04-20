@@ -69,4 +69,19 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    /**
+    * Handle a registration request for the application.
+    *
+    * @param $token
+    * @return \Illuminate\Http\Response
+    */
+    public function verify($token)
+    {
+        $user = User::where('email_token',$token)->first();
+        $user->email_verified = 1;
+        if($user->save()){
+            return view('emailconfirm',['user'=>$user]);
+        }
+    }
 }
