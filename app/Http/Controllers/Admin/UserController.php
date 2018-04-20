@@ -29,33 +29,7 @@ class UserController extends Controller
         return view('admin.user.index', compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin.user.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store(Request $request)
-    {
-        
-        $requestData = $request->all();
-        
-        User::create($requestData);
-
-        return redirect('admin/users')->with('flash_message', 'User added!');
-    }
-
+  
     /**
      * Display the specified resource.
      *

@@ -18,7 +18,8 @@ Route::get('/students', function () {    return view('students');})->name('stude
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/employer/register','EmployerController@create')->name('employer.register');
+Route::post('/employer/register','EmployerController@store')->name('employer.register');
 
 Route::middleware(['auth'])->group(function(){
 

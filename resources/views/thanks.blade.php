@@ -8,8 +8,8 @@
                 </h1>
 
                 <div class="text-center">
-                	<h3>Employers Page</h3>
-                	<a class="nav-link" href="{{ route('employer.register') }}">Employers Registrarion</a>
+                	<h3>Thank You!</h3>
+                	
                 </div>
             </div>
 @endsection
