@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in! Your account is: {{ auth()->user()->verified() ? 'Verified' : 'not Verified'}}
                 </div>
             </div>
         </div>

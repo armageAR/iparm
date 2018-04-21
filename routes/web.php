@@ -16,7 +16,7 @@ Route::get('/employers', function () {    return view('employers');})->name('emp
 Route::get('/students', function () {    return view('students');})->name('students');
 
 
-Route::get('/verifyemail/{token}', 'EmployerController@verify');
+Route::get('/verify/{token}', 'Auth\\VerifyEmailController@verify')->name('verify');
 
 Auth::routes();
 

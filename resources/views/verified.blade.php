@@ -8,8 +8,8 @@
                 </h1>
 
                 <div class="text-center">
-                	<h3>Thank You!</h3>
-                	<h4>An email was sent to verify your address</h4>
+                	<h3>Your account was verified</h3>
+                	<h4>You can log in now!</h4>
                 	
                 </div>
             </div>

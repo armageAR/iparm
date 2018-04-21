@@ -31,26 +31,28 @@
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                 @else
 
-                    <li class="nav-item dropdown">
-                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        @can('users.index')
-                            <li><a class="dropdown-item" href="{{ route ('admin.users.index') }}">Users</a></li>
-                        @endcan
-                        @can('roles.index')
-                            <li><a class="dropdown-item" href="{{ route ('admin.roles.index') }}">Roles</a></li>
-                        @endcan
-                        @can('permissions.index')
-                            <li><a class="dropdown-item" href="{{ route ('admin.permissions.index') }}">Permissions</a></li>
-                        @endcan
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a class="dropdown-item" href="#">One more separated link</a></li>
-                      </ul>
-                    </li>
-
+                    @can('users.index')
+                        <li class="nav-item dropdown">
+                          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            @can('users.index')
+                                <li><a class="dropdown-item" href="{{ route ('admin.users.index') }}">Users</a></li>
+                            @endcan
+                            @can('roles.index')
+                                <li><a class="dropdown-item" href="{{ route ('admin.roles.index') }}">Roles</a></li>
+                            @endcan
+                            @can('permissions.index')
+                                <li><a class="dropdown-item" href="{{ route ('admin.permissions.index') }}">Permissions</a></li>
+                            @endcan
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a class="dropdown-item" href="#">One more separated link</a></li>
+                          </ul>
+                        </li>
+                    @endcan
+                    
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>

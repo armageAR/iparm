@@ -6,6 +6,7 @@ use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use App\Notifications\VerifyEmail;
 
 Relation::morphMap([
     'employer' => 'App\Employer',
@@ -23,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'userable_id', 'userable_type', 'email_token'
+        'name', 'email', 'password', 'userable_id', 'userable_type', 'email_token', 'email_verified'
     ];
 
     /**
@@ -38,4 +39,24 @@ class User extends Authenticatable
     public function userable(){
         return $this->morphTo();
     }
+
+    /***
+    *   Check if the user mail is verified
+    *
+    *
+    */
+    public function verified()
+    {
+        return $this->email_verified === 1;
+    }
+
+    /**
+    *
+    *
+    */
+    public function sendVerificationEmail()
+    {
+        $this->notify(new VerifyEmail($this));
+    }
+
 }

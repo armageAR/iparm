@@ -47,22 +47,20 @@ class EmployerController extends Controller
             'password-confirm' => 'required_with:password|same:password|min:6'
         ]);
 
-        $emp = Employer::create(request(['companyname']));
+        $emp = Employer::create();
 
         $user = User::create([
             'email' => request('email'),
             'password' => bcrypt(request('password')),
+            'name' => request('name'),
             'email_token' => base64_encode(request('email')),
             'userable_id' => $emp->id,
             'userable_type' => 'employer'
         ]);
 
-        //Send email verification///////////////////////////////////
-        //dispatch(new SendVerificationEmail($user));
-        
-        return view('verification');
+        $user->SendVerificationEmail();
 
-        //return view('thanks');
+        return view('thanks');
     }
 
     /**
@@ -109,6 +107,7 @@ class EmployerController extends Controller
     {
         //
     }
+
 
    
 }
