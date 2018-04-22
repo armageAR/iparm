@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Employer;
+use App\Student;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Jobs\SendVerificationEmail;
 
 
-class EmployerController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +30,7 @@ class EmployerController extends Controller
      */
     public function create()
     {
-        return view('employer.register-step1');
+        return view('student.register-step1');
     }
 
     /**
@@ -48,19 +48,19 @@ class EmployerController extends Controller
             'password-confirm' => 'required_with:password|same:password|min:6'
         ]);
 
-        $emp = Employer::create();
+        $stu = Student::create();
 
         $user = User::create([
             'email' => request('email'),
             'password' => bcrypt(request('password')),
             'name' => request('name'),
             'email_token' => base64_encode(request('email')),
-            'userable_id' => $emp->id,
-            'userable_type' => 'employer'
+            'userable_id' => $stu->id,
+            'userable_type' => 'student'
         ]);
 
         //Auth::user()->assignRole(1);
-        $user->syncRoles([3]);
+        $user->syncRoles([4]);
 
         $user->SendVerificationEmail();
         Auth::logout();

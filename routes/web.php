@@ -24,6 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/employer/register','EmployerController@create')->name('employer.register');
 Route::post('/employer/register','EmployerController@store')->name('employer.register');
 
+Route::get('/student/register','StudentController@create')->name('student.register');
+Route::post('/student/register','StudentController@store')->name('student.register');
+
 
 
 
