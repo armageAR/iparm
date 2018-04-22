@@ -59,4 +59,9 @@ class User extends Authenticatable
         $this->notify(new VerifyEmail($this));
     }
 
+    public function type()
+    {
+        return $this->userable_type;
+    }
+
 }

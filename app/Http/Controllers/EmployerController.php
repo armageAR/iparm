@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Employer;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use App\Jobs\SendVerificationEmail;
@@ -43,7 +43,7 @@ class EmployerController extends Controller
         
         $validatedData = $request->validate([
             'email' => 'required|email|unique:users',
-            'password' => 'min:6',
+            'password' => 'required|min:6',
             'password-confirm' => 'required_with:password|same:password|min:6'
         ]);
 
@@ -59,7 +59,7 @@ class EmployerController extends Controller
         ]);
 
         $user->SendVerificationEmail();
-
+        Auth::logout();
         return view('thanks');
     }
 

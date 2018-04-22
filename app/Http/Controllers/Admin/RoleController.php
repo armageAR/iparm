@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Caffeinated\Shinobi\Models\Role;
+use Caffeinated\Shinobi\Models\Permission;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -39,7 +40,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.role.create');
+        
+        $permissions=Permission::get()->pluck('name','id');
+        return view('admin.role.create',compact('permissions'));
     }
 
     /**
@@ -52,9 +55,11 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         
-        $requestData = $request->all();
-        
-        Role::create($requestData);
+        $requestData = $request->except('permissions');
+        $permissions = $request->permissions;
+
+        $role = Role::create($requestData);
+        $role->syncPermissions($permissions);
 
         return redirect('admin/roles')->with('flash_message', 'Role added!');
     }
@@ -83,8 +88,9 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::findOrFail($id);
+        $permissions=Permission::get()->pluck('name','id');
 
-        return view('admin.role.edit', compact('role'));
+        return view('admin.role.edit', compact('role','permissions'));
     }
 
     /**
@@ -98,10 +104,12 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         
-        $requestData = $request->all();
+        $requestData = $request->except('permissions');
+        $permissions = $request->permissions;
         
         $role = Role::findOrFail($id);
         $role->update($requestData);
+        $role->syncPermissions($permissions);
 
         return redirect('admin/roles')->with('flash_message', 'Role updated!');
     }

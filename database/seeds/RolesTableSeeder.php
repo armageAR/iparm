@@ -17,5 +17,18 @@ class RolesTableSeeder extends Seeder
         	'slug'		=>	'admin',
         	'special'	=>	'all-access',
         ]);
+        Role::create([
+            'name'      => 'Suspended',
+            'slug'      => 'no.access',
+            'special'   => 'no-access'
+        ]);
+        Role::create([
+            'name'      => 'Employer',
+            'slug'      => 'employer'
+        ]);
+        Role::create([
+            'name'      => 'Students',
+            'slug'      => 'students'
+        ]);
     }
 }

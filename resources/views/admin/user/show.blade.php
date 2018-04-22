@@ -6,7 +6,7 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">user {{ $user->id }}</div>
+                    <div class="card-header">user {{ $user->name }}</div>
                     <div class="card-body">
 
                         <a href="{{ url('/admin/users') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
@@ -29,10 +29,10 @@
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <tbody>
-                                    <tr>
-                                        <th>ID</th><td>{{ $user->id }}</td>
-                                    </tr>
-                                    <tr><th> Name </th><td> {{ $user->name }} </td></tr><tr><th> Email </th><td> {{ $user->email }} </td></tr><tr><th> Roles </th><td> {{ $user->roles }} </td></tr>
+                                    
+                                    <tr><th> Name </th><td> {{ $user->name }} </td></tr><tr><th> Email </th><td> {{ $user->email }} </td></tr><tr><th> Roles </th>
+                                        <td> {{ implode(', ', $user->roles->pluck('name')->toArray()) }} </td></tr>
+
                                 </tbody>
                             </table>
                         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Caffeinated\Shinobi\Models\Role;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -54,8 +55,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+        $roles = Role::get()->pluck('name','id');
 
-        return view('admin.user.edit', compact('user'));
+        return view('admin.user.edit', compact('user','roles'));
     }
 
     /**
@@ -69,11 +71,13 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         
-        $requestData = $request->all();
+        $requestData = $request->except('roles');
+        $roles = $request->roles;
         
         $user = User::findOrFail($id);
         $user->update($requestData);
-
+        $user->syncRoles($roles);
+        
         return redirect('admin/users')->with('flash_message', 'User updated!');
     }
 

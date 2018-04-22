@@ -6,7 +6,7 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Permission {{ $permission->id }}</div>
+                    <div class="card-header">Permission {{ $permission->name }}</div>
                     <div class="card-body">
 
                         <a href="{{ url('/admin/permissions') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
@@ -29,10 +29,11 @@
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <tbody>
-                                    <tr>
-                                        <th>ID</th><td>{{ $permission->id }}</td>
-                                    </tr>
-                                    <tr><th> Name </th><td> {{ $permission->name }} </td></tr><tr><th> Slug </th><td> {{ $permission->slug }} </td></tr><tr><th> Description </th><td> {{ $permission->description }} </td></tr>
+                                    
+                                    <tr><th> Name </th><td> {{ $permission->name }} </td></tr>
+                                    <tr><th> Slug </th><td> {{ $permission->slug }} </td></tr>
+                                    <tr><th> Description </th><td> {{ $permission->description }} </td></tr>
+                                    
                                 </tbody>
                             </table>
                         </div>

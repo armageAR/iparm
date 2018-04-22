@@ -15,6 +15,8 @@
                     @endif
 
                     You are logged in! Your account is: {{ auth()->user()->verified() ? 'Verified' : 'not Verified'}}
+                    <br>
+                    {{auth()->user()->type()}}
                 </div>
             </div>
         </div>

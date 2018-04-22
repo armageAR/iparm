@@ -14,7 +14,7 @@
 Route::get('/', function () {    return view('welcome');});
 Route::get('/employers', function () {    return view('employers');})->name('employers');
 Route::get('/students', function () {    return view('students');})->name('students');
-
+Route::get('/notverified',function () {    return view('notverified');})->name('notverified');
 
 Route::get('/verify/{token}', 'Auth\\VerifyEmailController@verify')->name('verify');
 
@@ -24,7 +24,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/employer/register','EmployerController@create')->name('employer.register');
 Route::post('/employer/register','EmployerController@store')->name('employer.register');
 
+
+
+
 Route::middleware(['auth'])->group(function(){
+
+
+	Route::get('/employer/home',function () {    return view('/employer/home');});
+	Route::get('/admin/home',function () {    return view('/admin/home');});
 
 	//Roles
 	Route::post('admin/roles', 'Admin\\RoleController@store')->name('admin.roles.store')->middleware('permission:roles.create');

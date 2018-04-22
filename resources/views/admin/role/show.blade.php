@@ -6,7 +6,7 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Role {{ $role->id }}</div>
+                    <div class="card-header">Role {{ $role->name }}</div>
                     <div class="card-body">
 
                         <a href="{{ url('/admin/roles') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
@@ -29,10 +29,19 @@
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <tbody>
+                                    
                                     <tr>
-                                        <th>ID</th><td>{{ $role->id }}</td>
+                                        <th> Name </th><td> {{ $role->name }} </td>
                                     </tr>
-                                    <tr><th> Name </th><td> {{ $role->name }} </td></tr><tr><th> Slug </th><td> {{ $role->slug }} </td></tr><tr><th> Description </th><td> {{ $role->description }} </td></tr>
+                                    <tr>
+                                        <th> Slug </th><td> {{ $role->slug }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Description </th><td> {{ $role->description }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Permissions </th><td> {{ implode(', ', $role->permissions->pluck('name')->toArray()) }} </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
